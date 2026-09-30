@@ -1,0 +1,279 @@
+// Admin panel stylesheet. Shares brand tokens with the public site but uses a
+// quieter, work-focused look.
+@import 'brand';
+
+$body-bg: #f3f5f9;
+$font-size-base: .9375rem;
+$headings-color: $school-dark;
+
+@import 'bootstrap/scss/bootstrap';
+
+:root {
+    --sidebar-w: 264px;
+    --topbar-h: 64px;
+    --school-navy: #{$school-navy};
+    --school-red: #{$school-red};
+    --school-yellow: #{$school-yellow};
+}
+
+body { -webkit-font-smoothing: antialiased; background: $body-bg; }
+
+h1, h2, h3, h4, h5, h6 { font-weight: 700; letter-spacing: -.01em; }
+
+:focus-visible { outline: 3px solid rgba($school-yellow, .9); outline-offset: 2px; }
+
+// ---------------------------------------------------------------------------
+// Layout
+// ---------------------------------------------------------------------------
+
+.admin-sidebar {
+    width: var(--sidebar-w);
+    background: $school-navy-dark;
+    color: #000;
+
+    @include media-breakpoint-up(lg) {
+        position: fixed;
+        inset: 0 auto 0 0;
+        z-index: 1035;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .offcanvas-header, .sidebar-brand {
+        height: var(--topbar-h);
+        border-bottom: 1px solid rgba(#fff, .08);
+    }
+
+    .sidebar-brand {
+        display: flex;
+        align-items: center;
+        gap: .7rem;
+        padding: 0 1.25rem;
+        color: #fff;
+        font-weight: 700;
+        img, svg { height: 36px; width: auto; }
+        small { display: block; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: $school-yellow; font-weight: 700; }
+    }
+
+    .sidebar-nav { padding: 1rem .75rem 2rem; overflow-y: auto; flex: 1; }
+
+    .nav-heading {
+        font-size: .68rem;
+        font-weight: 800;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: rgba(#fff, .4);
+        padding: 1.1rem .85rem .45rem;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+        color: rgba(#fff, .75);
+        padding: .6rem .85rem;
+        border-radius: $border-radius;
+        font-weight: 500;
+        font-size: .92rem;
+        margin-bottom: 2px;
+        transition: background .15s, color .15s;
+        i { font-size: 1.05rem; width: 1.2rem; text-align: center; opacity: .85; }
+        &:hover { background: rgba(#fff, .06); color: #fff; }
+        &.active {
+            background: rgba($school-yellow, .14);
+            color: $school-yellow;
+            font-weight: 600;
+            box-shadow: inset 3px 0 0 $school-yellow;
+            i { opacity: 1; }
+        }
+        .badge { margin-left: auto; }
+    }
+
+    .sidebar-footer { border-top: 1px solid rgba(#fff, .08); padding: 1rem 1.25rem; font-size: .8rem; }
+    .sidebar-footer a { color: rgba(#fff, .7); &:hover { color: $school-yellow; } }
+}
+
+.offcanvas.admin-sidebar { --bs-offcanvas-width: var(--sidebar-w); --bs-offcanvas-bg: #{$school-navy-dark}; --bs-offcanvas-color: rgba(255,255,255,.75); }
+
+.admin-main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    @include media-breakpoint-up(lg) { margin-left: var(--sidebar-w); }
+}
+
+.admin-topbar {
+    height: var(--topbar-h);
+    background: #fff;
+    border-bottom: 1px solid $border-color;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    gap: .75rem;
+    @include media-breakpoint-up(md) { padding: 0 1.75rem; }
+    .avatar { width: 2.25rem; height: 2.25rem; border-radius: 50%; background: $school-navy; color: $school-yellow; display: grid; place-items: center; font-weight: 700; font-size: .8rem; }
+    .btn-icon { width: 2.4rem; height: 2.4rem; display: inline-grid; place-items: center; border-radius: 50%; color: $school-dark; position: relative; &:hover { background: $school-light; } }
+    .btn-icon .dot { position: absolute; top: .45rem; right: .45rem; width: .5rem; height: .5rem; border-radius: 50%; background: $school-red; border: 2px solid #fff; }
+}
+
+.admin-content { padding: 1.5rem 1rem 3rem; flex: 1; @include media-breakpoint-up(md) { padding: 1.75rem 1.75rem 3rem; } }
+
+.page-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    h1 { font-size: 1.5rem; margin: 0; }
+    .breadcrumb { font-size: .8rem; margin-bottom: .35rem; }
+    .breadcrumb a { color: $school-muted; &:hover { color: $school-navy; } }
+    p { color: $school-muted; margin: .25rem 0 0; font-size: .9rem; }
+}
+
+// ---------------------------------------------------------------------------
+// Cards, tables, forms
+// ---------------------------------------------------------------------------
+
+.card { border-color: #e6ebf2; box-shadow: $box-shadow-sm; }
+.card-header { background: #fff; border-bottom-color: #eef1f6; padding: 1rem 1.25rem; font-weight: 700; }
+.card-body { padding: 1.25rem; @include media-breakpoint-up(md) { padding: 1.5rem; } }
+
+.stat-tile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.25rem;
+    color: inherit;
+    transition: transform .15s, box-shadow .15s;
+    &:hover { transform: translateY(-2px); box-shadow: $box-shadow; color: inherit; }
+    .tile-icon { width: 3rem; height: 3rem; border-radius: .8rem; display: grid; place-items: center; font-size: 1.3rem; flex-shrink: 0; }
+    .tile-value { font-size: 1.6rem; font-weight: 800; line-height: 1.1; color: $school-dark; }
+    .tile-label { color: $school-muted; font-size: .83rem; font-weight: 600; }
+}
+
+.tile-navy { background: rgba($school-navy, .09); color: $school-navy; }
+.tile-gold { background: rgba($school-yellow, .2); color: darken($school-yellow, 22%); }
+.tile-red { background: rgba($school-red, .1); color: $school-red; }
+.tile-success { background: rgba($success, .12); color: $success; }
+.tile-info { background: rgba($info, .12); color: $info; }
+.tile-secondary { background: rgba($secondary, .14); color: darken($secondary, 10%); }
+
+.table {
+    --bs-table-hover-bg: #f8fafc;
+    margin-bottom: 0;
+    > thead th { font-size: .74rem; text-transform: uppercase; letter-spacing: .06em; color: $school-muted; font-weight: 700; background: #f8fafc; border-bottom-width: 1px; white-space: nowrap; padding-block: .8rem; }
+    > tbody td { vertical-align: middle; padding-block: .8rem; }
+    th a { color: inherit; &:hover { color: $school-navy; } }
+}
+
+.table-thumb { width: 72px; height: 48px; object-fit: cover; border-radius: .4rem; background: $school-light; display: block; }
+.table-thumb-placeholder { width: 72px; height: 48px; border-radius: .4rem; background: $school-light; display: grid; place-items: center; color: $school-muted; }
+
+.cell-title { font-weight: 600; color: $school-dark; max-width: 26rem; }
+.cell-sub { font-size: .8rem; color: $school-muted; }
+
+.status-badge { font-weight: 600; font-size: .75rem; padding: .35em .7em; border-radius: 999px; display: inline-flex; align-items: center; gap: .3rem; }
+
+.drag-handle { cursor: grab; color: $school-muted; padding: .25rem; &:active { cursor: grabbing; } }
+tr.dragging { opacity: .5; background: rgba($school-yellow, .12); }
+tr.drag-over td { box-shadow: inset 0 2px 0 $school-navy; }
+
+.form-label { color: $school-dark; }
+.form-text { font-size: .8rem; }
+.form-control, .form-select { &:focus { border-color: $school-navy; } }
+.form-switch .form-check-input { width: 2.5em; height: 1.35em; cursor: pointer; }
+.form-switch .form-check-label { cursor: pointer; padding-left: .25rem; }
+.form-check-input:checked { background-color: $success; border-color: $success; }
+.required::after { content: ' *'; color: $school-red; }
+
+.form-section-title { font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: $school-muted; font-weight: 800; margin: 0 0 1rem; }
+
+.image-preview {
+    border: 2px dashed $border-color;
+    border-radius: $border-radius;
+    background: #fafbfd;
+    min-height: 160px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    position: relative;
+    img { max-width: 100%; max-height: 260px; object-fit: contain; display: block; }
+    .placeholder-text { color: $school-muted; text-align: center; font-size: .85rem; i { font-size: 2rem; display: block; opacity: .5; } }
+}
+
+.preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: .6rem; img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: .5rem; } }
+
+.sticky-actions {
+    position: sticky;
+    bottom: 0;
+    background: rgba(#fff, .96);
+    backdrop-filter: blur(6px);
+    border-top: 1px solid $border-color;
+    padding: .9rem 1.25rem;
+    margin: 0 -1px -1px;
+    border-radius: 0 0 $card-border-radius $card-border-radius;
+    display: flex;
+    gap: .5rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    z-index: 5;
+}
+
+// Gallery admin grid
+.admin-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.admin-gallery-item {
+    background: #fff;
+    border: 1px solid #e6ebf2;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    .thumb { position: relative; aspect-ratio: 4 / 3; background: $school-light; img { width: 100%; height: 100%; object-fit: cover; } }
+    .thumb .badges { position: absolute; top: .5rem; left: .5rem; display: flex; gap: .25rem; flex-wrap: wrap; }
+    .meta { padding: .75rem .85rem; font-size: .83rem; flex: 1; }
+    .actions { padding: .5rem .85rem .85rem; display: flex; gap: .35rem; }
+    &.is-inactive .thumb img { opacity: .45; filter: grayscale(.6); }
+}
+
+// CKEditor
+.ck-editor__editable_inline { min-height: 320px; }
+.ck.ck-editor { width: 100%; }
+.ck-content { font-size: 1rem; line-height: 1.7; }
+.ck.ck-editor__main > .ck-editor__editable { border-radius: 0 0 $border-radius $border-radius !important; }
+.ck.ck-toolbar { border-radius: $border-radius $border-radius 0 0 !important; }
+.is-invalid + .ck-editor .ck-editor__editable { border-color: $danger !important; }
+
+// Toasts
+.toast-container { z-index: 1090; }
+.toast { border: 0; box-shadow: $box-shadow-lg; }
+
+// Enquiry message
+.message-body { white-space: pre-line; font-size: 1rem; line-height: 1.75; background: #fafbfd; border: 1px solid $border-color; border-radius: $border-radius; padding: 1.25rem; }
+
+// Auth
+.auth-shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    background: #fff;
+    @include media-breakpoint-down(lg) { grid-template-columns: 1fr; }
+}
+.auth-aside {
+    background-color: $school-navy;
+    background-image: radial-gradient(circle at 80% 15%, rgba($school-yellow, .22) 0, transparent 40%), radial-gradient(circle at 10% 95%, rgba($school-red, .28) 0, transparent 42%);
+    color: rgba(#fff, .8);
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    h1 { color: #fff; font-family: 'Playfair Display Variable', Georgia, serif; font-size: clamp(2rem, 3vw, 2.8rem); }
+    @include media-breakpoint-down(lg) { display: none; }
+}
+.auth-form-wrap { display: grid; place-items: center; padding: 2rem 1.25rem; }
+.auth-form { width: 100%; max-width: 400px; }
+
+.empty-row { text-align: center; padding: 3rem 1rem !important; color: $school-muted; i { font-size: 2rem; display: block; margin-bottom: .5rem; opacity: .5; } }

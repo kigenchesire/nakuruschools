@@ -1,0 +1,74 @@
+// ---------------------------------------------------------------------------
+// Nakuru Schools brand tokens. Change the school colours here: Bootstrap's
+// theme colours, the CSS custom properties and both stylesheets derive from them.
+// ---------------------------------------------------------------------------
+
+$school-navy: #0b2447;
+$school-navy-dark: #071a33;
+$school-red: #c8102e;
+$school-yellow: #f2b705;
+$school-light: #f5f7fb;
+$school-dark: #16202e;
+$school-muted: #5b6778;
+
+// Bootstrap overrides
+$primary: $school-navy;
+$secondary: #64748b;
+$danger: $school-red;
+$warning: $school-yellow;
+$success: #1f8a5b;
+$info: #1f6fb2;
+$dark: $school-dark;
+$light: $school-light;
+
+$body-color: $school-dark;
+$body-secondary-color: $school-muted;
+$link-color: $school-navy;
+$link-hover-color: $school-red;
+$link-decoration: none;
+
+$font-family-sans-serif: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+$headings-font-weight: 700;
+$headings-color: $school-navy;
+$font-size-base: 1rem;
+$line-height-base: 1.65;
+
+$border-radius: .625rem;
+$border-radius-sm: .5rem;
+$border-radius-lg: .875rem;
+$border-radius-xl: 1.25rem;
+$border-color: #e3e8ef;
+
+$btn-font-weight: 600;
+$btn-padding-y: .625rem;
+$btn-padding-x: 1.25rem;
+$btn-padding-y-lg: .8rem;
+$btn-padding-x-lg: 1.75rem;
+$btn-font-size-lg: 1rem;
+$input-btn-focus-color: rgba($school-navy, .2);
+$input-padding-y: .625rem;
+$input-padding-x: .875rem;
+$input-border-color: #d5dce6;
+$form-label-font-weight: 600;
+$form-label-font-size: .9rem;
+
+$card-border-color: #e8edf3;
+$card-border-radius: $border-radius-lg;
+$card-cap-bg: #fff;
+
+$accordion-button-active-bg: $school-light;
+$accordion-button-active-color: $school-navy;
+$accordion-border-color: $border-color;
+
+$breadcrumb-divider: quote("›");
+$pagination-color: $school-navy;
+$pagination-active-bg: $school-navy;
+$pagination-active-border-color: $school-navy;
+$pagination-border-radius: $border-radius-sm;
+
+$enable-shadows: false;
+$enable-smooth-scroll: true;
+
+$box-shadow-sm: 0 1px 3px rgba(11, 36, 71, .06), 0 1px 2px rgba(11, 36, 71, .04);
+$box-shadow: 0 10px 30px -12px rgba(11, 36, 71, .18);
+$box-shadow-lg: 0 24px 60px -20px rgba(11, 36, 71, .28);
